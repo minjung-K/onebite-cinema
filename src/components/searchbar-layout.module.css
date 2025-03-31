@@ -1,6 +1,7 @@
 .searchbar_container {
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 }
 .searchbar_container > input {
   flex: 1;

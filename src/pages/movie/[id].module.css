@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.container_img_cover {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: relative;
+}
+.container_img_cover::before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.089);
+}
+.container_img_cover > img {
+  z-index: 1;
+  max-height: 350px;
+  height: 100%;
+}
+.title {
+  font-size: large;
+  font-weight: bold;
+}
+
+.subTitle {
+  font-size: medium;
+  font-weight: bold;
+}
