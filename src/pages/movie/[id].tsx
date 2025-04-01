@@ -1,16 +1,20 @@
-import { useRouter } from 'next/router';
-import movies from '@/mock/dummy.json';
 import style from './[id].module.css';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import fetchOneMovie from '@/lib/fetch-one-movie';
 
-export default function Page() {
-  const router = useRouter();
-  console.log(router);
-  const { id } = router.query;
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const id = context.params!.id;
+  const movie = await fetchOneMovie(Number(id));
+  return {
+    props: { movie },
+  };
+};
 
-  const movieData = movies.filter((movie) => {
-    return movie.id === Number(id);
-  });
-  console.log('movieData===', movieData);
+export default function Page({
+  movie,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const {
     posterImgUrl,
     title,
@@ -20,10 +24,10 @@ export default function Page() {
     company,
     subTitle,
     description,
-  } = movieData[0];
+  } = movie;
 
   let formattedGenres = '';
-  genres.forEach((genre) => {
+  genres.forEach((genre: string) => {
     formattedGenres += genre + ',';
   });
   const len = formattedGenres.length - 1;

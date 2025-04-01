@@ -1,7 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+
+  font-size: large;
 }
 .container_img_cover {
   display: flex;
@@ -20,9 +22,10 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.089);
+  background-color: rgba(0, 0, 0, 0.07);
+  content: '';
 }
-.container_img_cover > img {
+.container_img_cover img {
   z-index: 1;
   max-height: 350px;
   height: 100%;

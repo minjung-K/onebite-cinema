@@ -1,22 +1,33 @@
 import { ReactNode } from 'react';
 import SearchBarLayout from '@/components/searchbar-layout';
 import MovieItem from '@/components/movie-item';
-import movies from '@/mock/dummy.json';
+
 import { useRouter } from 'next/router';
 import style from './index.module.css';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { MovieData } from '@/types';
+import fetchMovies from '@/lib/fetch-movie';
 
-export default function Page() {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const q = context.query.q;
+  const movies = await fetchMovies(q as string);
+  return {
+    props: { movies },
+  };
+};
+
+export default function Page({
+  movies,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const q = router.query.q as string;
   console.log(q);
-  const searchMovies = movies.filter((movie) => {
-    if (movie.title.includes(q)) {
-      return movie;
-    }
-  });
+
   return (
     <div className={style.container}>
-      {searchMovies.map((movie) => (
+      {movies.map((movie: MovieData) => (
         <MovieItem key={movie.id} {...movie} />
       ))}
     </div>
