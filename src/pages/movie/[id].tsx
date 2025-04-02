@@ -37,12 +37,12 @@ export default function Page({
       <>
         <Head>
           <title>한입시네마</title>
-          <meta property="og:image" content="/thumbnail.png"></meta>
-          <meta property="og:title" content="한입시네마"></meta>
+          <meta property="og:image" content="/thumbnail.png" />
+          <meta property="og:title" content="한입시네마" />
           <meta
             property="og:description"
             content="한입시네마 영화를 감상하세요"
-          ></meta>
+          />
         </Head>
         <div>로딩중입니다</div>
       </>

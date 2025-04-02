@@ -9,7 +9,6 @@ import { MovieData } from '@/types';
 import Head from 'next/head';
 
 export const getStaticProps = async () => {
-  console.log('인덱스 페이지');
   const [allMovies, recoMovies] = await Promise.all([
     fetchMovies(),
     fetchRandomMovies(),
@@ -31,12 +30,12 @@ export default function Home({
     <>
       <Head>
         <title>한입시네마</title>
-        <meta property="og:image" content="/thumbnail.png"></meta>
-        <meta property="og:title" content="한입시네마"></meta>
+        <meta property="og:image" content="/thumbnail.png" />
+        <meta property="og:title" content="한입시네마" />
         <meta
           property="og:description"
           content="한입시네마 영화를 감상하세요"
-        ></meta>
+        />
       </Head>
       <div>
         <section>
