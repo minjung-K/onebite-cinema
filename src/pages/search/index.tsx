@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import style from './index.module.css';
 import { MovieData } from '@/types';
 import fetchMovies from '@/lib/fetch-movie';
+import Head from 'next/head';
 
 export default function Page() {
   const [movies, setMovies] = useState<MovieData[]>([]);
@@ -25,11 +26,22 @@ export default function Page() {
   }, [q]);
 
   return (
-    <div className={style.container}>
-      {movies.map((movie: MovieData) => (
-        <MovieItem key={movie.id} {...movie} />
-      ))}
-    </div>
+    <>
+      <Head>
+        <title>한입시네마-검색결과</title>
+        <meta property="og:image" content="/thumbnail.png"></meta>
+        <meta property="og:title" content="한입시네마-검색결과"></meta>
+        <meta
+          property="og:description"
+          content="한입시네마 영화를 감상하세요"
+        ></meta>
+      </Head>
+      <div className={style.container}>
+        {movies.map((movie: MovieData) => (
+          <MovieItem key={movie.id} {...movie} />
+        ))}
+      </div>
+    </>
   );
 }
 

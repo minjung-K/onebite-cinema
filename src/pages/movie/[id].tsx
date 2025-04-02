@@ -2,6 +2,7 @@ import style from './[id].module.css';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import fetchOneMovie from '@/lib/fetch-one-movie';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export const getStaticPaths = () => {
   return {
@@ -32,7 +33,20 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
   if (router.isFallback) {
-    return '로딩중입니다';
+    return (
+      <>
+        <Head>
+          <title>한입시네마</title>
+          <meta property="og:image" content="/thumbnail.png"></meta>
+          <meta property="og:title" content="한입시네마"></meta>
+          <meta
+            property="og:description"
+            content="한입시네마 영화를 감상하세요"
+          ></meta>
+        </Head>
+        <div>로딩중입니다</div>
+      </>
+    );
   }
   console.log('movie==', movie);
   const {
@@ -54,17 +68,25 @@ export default function Page({
   formattedGenres = formattedGenres.slice(0, len);
 
   return (
-    <div className={style.container}>
-      <div className={style.container_img_cover}>
-        <img src={posterImgUrl} />
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:image" content={posterImgUrl}></meta>
+        <meta property="og:title" content={title}></meta>
+        <meta property="og:description" content={description}></meta>
+      </Head>
+      <div className={style.container}>
+        <div className={style.container_img_cover}>
+          <img src={posterImgUrl} />
+        </div>
+        <div className={style.title}>{title}</div>
+        <div>
+          {releaseDate} / {formattedGenres} / {runtime}분
+        </div>
+        <div>{company}</div>
+        <div className={style.subTitle}>{subTitle}</div>
+        <div>{description}</div>
       </div>
-      <div className={style.title}>{title}</div>
-      <div>
-        {releaseDate} / {formattedGenres} / {runtime}분
-      </div>
-      <div>{company}</div>
-      <div className={style.subTitle}>{subTitle}</div>
-      <div>{description}</div>
-    </div>
+    </>
   );
 }

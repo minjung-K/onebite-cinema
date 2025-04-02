@@ -1,5 +1,5 @@
 export default async function fetchOneMovie(id: number) {
-  const url = `http://localhost:12345/movie/${id}`;
+  const url = `https://onebite-cinema-api-main-bay.vercel.app/${id}`;
 
   try {
     const response = await fetch(url);

@@ -1,5 +1,5 @@
 export default async function fetchRandomMovies() {
-  const url = 'http://localhost:12345/movie/random';
+  const url = 'https://onebite-cinema-api-main-bay.vercel.app/movie/random';
 
   try {
     const response = await fetch(url);
